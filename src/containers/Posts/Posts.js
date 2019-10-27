@@ -31,13 +31,14 @@ class Posts extends Component {
     }
     
     postSelectedHandler = (id) => {
-        this.setState({selectedPostId: id});
+        //this.setState({selectedPostId: id});
         // Alternative to using Link in return statement
         // It pushs the new page onto the existing stack of pages
-        this.props.history.push({pathname: '/' + id})
+        this.props.history.push({pathname: this.props.match.path + '/' + id})
     }
 
-    render() {       
+    render() {    
+        //console.log(this.props.match.url) 
         let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
         if (!this.state.error) {
             posts = this.state.posts.map(post => {
@@ -61,7 +62,7 @@ class Posts extends Component {
                     {posts} 
                 </section>
                 {/* starting with ':' are parameters in path */}
-                <Route path="/:id" exact component={FullPost} />
+                <Route path={this.props.match.url + "/:id"} exact component={FullPost} />
             </div>
         )
     }
